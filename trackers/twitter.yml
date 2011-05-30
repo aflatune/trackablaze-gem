@@ -1,0 +1,12 @@
+params:
+  handle:
+    name: 'Twitter handle'
+    description: 'This is the Twitter username'
+    type: string
+  
+metrics:
+  followers_count:
+    name: 'Followers count'
+    default: true
+  friends_count:
+    name: 'Friends count'

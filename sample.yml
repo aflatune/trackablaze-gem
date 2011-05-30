@@ -1,0 +1,12 @@
+- twitter:
+    params:
+      handle: amolk
+    metrics:
+    - followers_count 
+    - friends_count
+  
+- twitter:
+    params:
+      handle: msuster
+
+
