@@ -48,11 +48,15 @@ such as for the first twitter tracker, those specific metrics
 are listed in the output. Otherwise, the default set of 
 metrics are reported.
 
-Output (work in progress) 
+Output 
 
-    {"followers_count"=>25, "friends_count"=>29}
-    {"followers_count"=>35731}
-    
+    --------------------------------[ twitter ]--------------------------------
+    params: {"handle"=>"amolk"}
+    results: {"followers_count"=>25, "friends_count"=>29}
+    --------------------------------[ twitter ]--------------------------------
+    params: {"handle"=>"msuster"}
+    results: {"followers_count"=>35834}
+
 # Trackablaze Trackers
 
 Trackablaze trackers collection is available
@@ -81,25 +85,33 @@ are made of up of a **YAML config file** and a **ruby code file**.
 
 ### Sample tracker ruby file 
 
-    require 'twitter'
-
-    module Trackablaze
-      class Twitter < Tracker
-        def get_metrics(params, metrics_keys)
-          metrics = {}
-  
-          user = ::Twitter.user(params["handle"])
-      
-          metrics_keys ||= Twitter.default_metrics
-  
-          metrics_keys.each do |metrics_key|
-            metrics[metrics_key] = user[metrics_key]
-          end
-  
-          metrics
-        end
-      end
+    def get_metrics(configs)
+      configs.collect {|c| get_metrics_single(c)}
     end
+
+    private
+    
+    def get_metrics_single(config)      
+      params, metrics_keys = config['params'], config['metrics']
+      metrics = {}
+
+      user = ::Twitter.user(params["handle"])
+  
+      metrics_keys ||= Twitter.default_metrics
+
+      metrics_keys.each do |metrics_key|
+        metrics[metrics_key] = user[metrics_key]
+      end
+
+      metrics
+    end
+
+A tracker must implement get_metrics() method. This method takes
+in an array of configurations. Your tracker may choose to query
+for each configuration one by one or use any available optimized
+API calls. For example, the above code queries Twitter API once
+for each user handle, but can be optimized by using the 
+::Twitter.users API call that takes an array of user handles.
 
 It's really that simple. The gem has RSpec tests that automatically
 validate each tracker in the repository, so you should run `rake spec`

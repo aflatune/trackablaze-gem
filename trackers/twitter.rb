@@ -2,7 +2,12 @@ require 'twitter'
 
 module Trackablaze
   class Twitter < Tracker
-    def get_metrics(params, metrics_keys)
+    def get_metrics(configs)
+      configs.collect {|c| get_metrics_single(c)}
+    end
+    
+    def get_metrics_single(config)      
+      params, metrics_keys = config['params'], config['metrics']
       metrics = {}
   
       user = ::Twitter.user(params["handle"])
