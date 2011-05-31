@@ -4,7 +4,11 @@
     metrics:
     - followers_count 
     - friends_count
-  
+
+- facebook_page:
+    params:
+      page_id: 125602120804573
+      
 - twitter:
     params:
       handle: msuster
