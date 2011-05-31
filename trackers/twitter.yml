@@ -1,3 +1,5 @@
+title: 'Twitter'
+
 params:
   handle:
     name: 'Twitter handle'

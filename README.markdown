@@ -37,25 +37,32 @@ Contents of sample.yml
         - followers_count 
         - friends_count
 
+    - facebook_page:
+        params:
+          page_id: 125602120804573
+      
     - twitter:
         params:
           handle: msuster
-
   
 This will output twitter metrics for the two twitter handles 
-(amolk, msuster) specified. If a list of metrics is specified, 
+(amolk, msuster) and metrics for the facebook page specified. 
+If a list of metrics is specified, 
 such as for the first twitter tracker, those specific metrics
 are listed in the output. Otherwise, the default set of 
 metrics are reported.
 
 Output 
 
-    --------------------------------[ twitter ]--------------------------------
+    --------------------------------[ Twitter ]--------------------------------
     params: {"handle"=>"amolk"}
     results: {"followers_count"=>25, "friends_count"=>29}
-    --------------------------------[ twitter ]--------------------------------
+    -----------------------------[ Facebook page ]-----------------------------
+    params: {"page_id"=>125602120804573}
+    results: {"likes"=>13}
+    --------------------------------[ Twitter ]--------------------------------
     params: {"handle"=>"msuster"}
-    results: {"followers_count"=>35834}
+    results: {"followers_count"=>35836}
 
 # Trackablaze Trackers
 
@@ -69,6 +76,8 @@ Submitting a tracker is actually a very straightforward process. Trackers
 are made of up of a **YAML config file** and a **ruby code file**. 
 
 ### Sample YAML config file
+
+    title: 'Twitter'
 
     params:
       handle:

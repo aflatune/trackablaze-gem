@@ -37,7 +37,7 @@ module Trackablaze
       (0..config.length-1).each do |n|
         c = config[n]
         tracker_name = c.keys.first
-        puts "[ #{tracker_name} ]".center(75,'-')
+        puts "[ #{Trackablaze::Tracker.trackers[tracker_name].title} ]".center(75,'-')
         puts "params: #{c[tracker_name]['params']}"
         puts "results: #{results[n]}"
       end

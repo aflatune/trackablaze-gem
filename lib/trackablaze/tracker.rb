@@ -20,6 +20,10 @@ module Trackablaze
       @info ||= YAML::load( File.open( File.dirname(__FILE__) + "/../../trackers/#{self.handle}.yml" ) )
     end
     
+    def self.title
+      self.info['title']
+    end
+    
     def self.default_metrics
       @default_metrics ||= self.info['metrics'].collect{|k, v| k if v && v['default']}.compact
     end
