@@ -2,8 +2,8 @@ title: 'Twitter'
 
 params:
   handle:
-    name: 'Twitter handle'
-    description: 'This is the Twitter username'
+    name: 'Handle'
+    description: 'Twitter handle, same as username'
     type: string
   
 metrics:

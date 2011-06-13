@@ -10,10 +10,20 @@ module Trackablaze
       params, metrics_keys = config['params'], config['metrics']
       metrics = {}
   
+      if (params["page_id"].nil?)
+        add_error(metrics, "No Facebook page ID supplied", "page_id") 
+        return metrics
+      end
+  
       begin
         page_info = MiniFB.get(nil, params["page_id"])
       rescue
         page_info = {}
+      end
+      
+      if (page_info.nil? || page_info['likes'].nil?)
+        add_error(metrics, "Invalid Facebook page ID supplied", "page_id")
+        return metrics
       end
       
       metrics_keys ||= FacebookPage.default_metrics

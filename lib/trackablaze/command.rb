@@ -11,28 +11,7 @@ module Trackablaze
       Trackablaze::Tracker.load_trackers
       config = YAML::load( File.open( file ) )
       
-      results = []
-      trackers = {}
-      index = 0
-      config.each do |tracker_node|
-        tracker_name = tracker_node.keys.first
-        trackers[tracker_name] ||= []
-        tracker_config = tracker_node.values.first
-        tracker_config['index'] = index
-        trackers[tracker_name] << tracker_config
-        index += 1
-      end
-      
-      trackers.each do |tracker_name, tracker_configs|
-        tracker = Trackablaze::Tracker.trackers[tracker_name].new
-        
-        tracker_config_index = 0
-        tracker.get_metrics(tracker_configs).each do |tracker_result|
-          index = tracker_configs[tracker_config_index]['index']
-          results[index] = tracker_result
-          tracker_config_index += 1
-        end
-      end
+      results = Trackablaze::Tracker.run_trackers(config)
       
       (0..config.length-1).each do |n|
         c = config[n]

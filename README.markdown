@@ -15,7 +15,7 @@ Installation is simple:
 ## Usage
 
 'trackablaze' lets you track web metrics. For
-example, the Twitter recipe lets you find metrics
+example, the Twitter tracker lets you find metrics
 about a specific Twitter account - metrics such as number of
 followers, number of friends, etc. Depending on the tracker
 used either only public information is available or 
@@ -137,5 +137,5 @@ please see the wiki.
 Trackablaze and its recipes are distributed under the MIT License.
 
 [1]:http://railswizard.org/
-[2]:https://github.com/amolk/trackablaze.gem
+[2]:https://github.com/aflatune/trackablaze-gem/tree/master/trackers
 [3]:https://github.com/amolk/trackablaze.web

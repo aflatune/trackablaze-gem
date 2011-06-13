@@ -10,12 +10,27 @@ module Trackablaze
       params, metrics_keys = config['params'], config['metrics']
       metrics = {}
   
-      user = ::Twitter.user(params["handle"])
+      if (params["handle"].nil? || params["handle"].empty?)
+        add_error(metrics, "No handle supplied", "handle") 
+        return metrics
+      end
+      
+      user = nil
+      begin
+        user = ::Twitter.user(params["handle"])
+      rescue      
+      end
+
+      if (user.nil?)
+        add_error(metrics, "Invalid handle supplied", "handle")
+        return metrics
+      end
       
       metrics_keys ||= Twitter.default_metrics
   
       metrics_keys.each do |metrics_key|
-        metrics[metrics_key] = user[metrics_key]
+        value = user[metrics_key]
+        metrics[metrics_key] = value
       end
   
       metrics
