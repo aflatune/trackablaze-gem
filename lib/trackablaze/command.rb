@@ -11,14 +11,18 @@ module Trackablaze
       Trackablaze::Tracker.load_trackers
       config = YAML::load( File.open( file ) )
       
-      results = Trackablaze::Tracker.run_trackers(config)
+      tracker_items = []
+      config.each do |c|
+        tracker_items << Trackablaze::TrackerItem.new(c)
+      end
       
-      (0..config.length-1).each do |n|
-        c = config[n]
-        tracker_name = c.keys.first
-        puts "[ #{Trackablaze::Tracker.trackers[tracker_name].title} ]".center(75,'-')
-        puts "params: #{c[tracker_name]['params']}"
-        puts "results: #{results[n]}"
+      results = Trackablaze::TrackerItem.run(tracker_items)
+      
+      tracker_items.each do |tracker_item|
+        puts "[ #{tracker_item.title} ]".center(75,'-')
+        puts "Key: #{tracker_item.key}"
+        puts "params: #{tracker_item.params}"
+        puts "results: #{results[tracker_item.key]}"
       end
     end
   end

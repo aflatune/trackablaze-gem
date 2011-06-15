@@ -1,6 +1,19 @@
 module Trackablaze
   class Tracker
     
+    # A string that uniquely identifies this instance of the tracker
+    # This is to optimize multiple instances that are exactly the same
+    # e.g. if 100 people want to track amolk's twitter account, the tracker can
+    # be run only once, optimizing calls to Twitter API. 
+    def self.key(config)
+      # By default we use all params and metrics
+      sb = []
+      sb.push(self.handle)
+      sb.push(config['params'].flatten) if config['params']
+      sb.push((config['metrics'] || default_metrics).flatten)
+      sb.flatten.join('_')
+    end
+    
     class << self
       attr_accessor :trackers
     
@@ -9,36 +22,7 @@ module Trackablaze
         Trackablaze::Tracker.subclasses.each do |t|
           @trackers[t.handle] = t
         end
-      end
-      
-      # This function takes config object, similar in structure to a loaded yml config file
-      def run_trackers(config)
-        results = []
-        trackers = {}
-        index = 0
-        config.each do |tracker_node|
-          tracker_name = tracker_node.keys.first
-          trackers[tracker_name] ||= []
-          tracker_config = tracker_node.values.first
-          tracker_config['index'] = index
-          trackers[tracker_name] << tracker_config
-          index += 1
-        end
-
-        trackers.each do |tracker_name, tracker_configs|
-          tracker = Trackablaze::Tracker.trackers[tracker_name].new
-
-          tracker_config_index = 0
-          tracker.get_metrics(tracker_configs).each do |tracker_result|
-            index = tracker_configs[tracker_config_index]['index']
-            results[index] = tracker_result
-            tracker_config_index += 1
-          end
-        end
-      
-        return results
-      end
-
+      end      
     end
     
     def self.handle
@@ -62,11 +46,8 @@ module Trackablaze
     end
     
     def add_error(metrics, error, field = nil)
-      puts "ADDING ERROR #{error} on #{field}"
       metrics['errors'] ||= []
       metrics['errors'].push({:error => error, :field => field})
-      
-      puts "ADDED ERROR #{metrics.inspect}"
     end
 
   end

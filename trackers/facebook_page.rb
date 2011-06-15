@@ -2,21 +2,20 @@ require 'mini_fb'
 
 module Trackablaze
   class FacebookPage < Tracker
-    def get_metrics(configs)
-      configs.collect {|c| get_metrics_single(c)}
+    def get_metrics(tracker_items)
+      tracker_items.collect {|tracker_item| get_metrics_single(tracker_item)}
     end
     
-    def get_metrics_single(config)      
-      params, metrics_keys = config['params'], config['metrics']
+    def get_metrics_single(tracker_item)  
       metrics = {}
   
-      if (params["page_id"].nil?)
+      if (tracker_item.params["page_id"].nil?)
         add_error(metrics, "No Facebook page ID supplied", "page_id") 
         return metrics
       end
   
       begin
-        page_info = MiniFB.get(nil, params["page_id"])
+        page_info = MiniFB.get(nil, tracker_item.params["page_id"])
       rescue
         page_info = {}
       end
@@ -25,11 +24,9 @@ module Trackablaze
         add_error(metrics, "Invalid Facebook page ID supplied", "page_id")
         return metrics
       end
-      
-      metrics_keys ||= FacebookPage.default_metrics
   
-      metrics_keys.each do |metrics_key|
-        metrics[metrics_key] = page_info[metrics_key]
+      tracker_item.metrics.each do |metric|
+        metrics[metric] = page_info[metric]
       end
   
       metrics
