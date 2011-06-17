@@ -94,26 +94,42 @@ are made of up of a **YAML config file** and a **ruby code file**.
 
 ### Sample tracker ruby file 
 
-    def get_metrics(configs)
-      configs.collect {|c| get_metrics_single(c)}
-    end
+    require 'twitter'
 
-    private
+    module Trackablaze
+      class Twitter < Tracker
+        def get_metrics(tracker_items)
+          tracker_items.collect {|tracker_item| get_metrics_single(tracker_item)}
+        end
     
-    def get_metrics_single(config)      
-      params, metrics_keys = config['params'], config['metrics']
-      metrics = {}
-
-      user = ::Twitter.user(params["handle"])
+        def get_metrics_single(tracker_item)  
+          metrics = {}
   
-      metrics_keys ||= Twitter.default_metrics
+          if (tracker_item.params["handle"].nil? || tracker_item.params["handle"].empty?)
+            add_error(metrics, "No handle supplied", "handle") 
+            return metrics
+          end
+      
+          user = nil
+          begin
+            user = ::Twitter.user(tracker_item.params["handle"])
+          rescue      
+          end
 
-      metrics_keys.each do |metrics_key|
-        metrics[metrics_key] = user[metrics_key]
+          if (user.nil?)
+            add_error(metrics, "Invalid handle supplied", "handle")
+            return metrics
+          end
+  
+          tracker_item.metrics.each do |metric|
+            metrics[metric] = user[metric]
+          end
+  
+          metrics
+        end
       end
-
-      metrics
     end
+
 
 A tracker must implement get_metrics() method. This method takes
 in an array of configurations. Your tracker may choose to query
@@ -138,4 +154,3 @@ Trackablaze and its recipes are distributed under the MIT License.
 
 [1]:http://railswizard.org/
 [2]:https://github.com/aflatune/trackablaze-gem/tree/master/trackers
-[3]:https://github.com/amolk/trackablaze.web
