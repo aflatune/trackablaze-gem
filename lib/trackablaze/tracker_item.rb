@@ -17,6 +17,17 @@ module Trackablaze
       @tracker_class.title
     end
 
+    def full_title
+      sb = []
+  		sb << @tracker_class.title
+  		sb << " "
+  		@params.each do |p, v|
+  		  sb << "[#{@tracker_class.param_title(p)} = #{v}]"
+  		end
+  		
+  		return sb.join('')
+    end
+    
     # This function takes config object, similar in structure to a loaded yml config file
     def self.run(tracker_items)
       Trackablaze::Tracker.load_trackers

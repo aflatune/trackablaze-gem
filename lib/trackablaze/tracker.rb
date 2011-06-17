@@ -50,5 +50,12 @@ module Trackablaze
       metrics['errors'].push({:error => error, :field => field})
     end
 
+    def self.param_title(param_name)
+      info['params'][param_name]['name']
+    end
+    
+    def self.metric_title(metric_name)
+      info['metrics'][metric_name]['name']
+    end
   end
 end
