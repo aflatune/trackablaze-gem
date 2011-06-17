@@ -1,3 +1,7 @@
+- pagerank:
+    params:
+      domain: msnbc.com
+        
 - twitter:
     params:
       handle: amolk

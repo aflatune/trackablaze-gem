@@ -1,0 +1,12 @@
+title: 'Google PageRank'
+
+params:
+  domain:
+    name: 'Domain'
+    description: 'Domain name (e.g. google.com)'
+    type: string
+  
+metrics:
+  pagerank:
+    name: 'PageRank'
+    default: true
