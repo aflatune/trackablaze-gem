@@ -51,11 +51,21 @@ module Trackablaze
     end
 
     def self.param_title(param_name)
-      info['params'][param_name]['name']
+      param_info = info['params'][param_name]
+      if param_info
+        param_info['name']
+      else
+        param_name
+      end
     end
     
     def self.metric_title(metric_name)
-      info['metrics'][metric_name]['name']
+      metric_info = info['metrics'][metric_name]
+      if metric_info
+        metric_info['name']
+      else
+        metric_name
+      end
     end
   end
 end
