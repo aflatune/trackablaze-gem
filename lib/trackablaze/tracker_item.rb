@@ -12,7 +12,11 @@ module Trackablaze
     def key()
       @key ||= tracker_class.key(config)
     end
-    
+
+    def key2()
+      @key2 ||= tracker_class.key2(config)
+    end
+      
     def title
       @tracker_class.title
     end

@@ -13,6 +13,16 @@ module Trackablaze
       sb.push((config['metrics'] || default_metrics).flatten)
       sb.flatten.join('_')
     end
+  
+    # A string that uniquely identifies this instance of the tracker, without the metrics list
+    # This is used in the csv output
+    def self.key2(config)
+      # By default we use all params and metrics
+      sb = []
+      sb.push(self.handle)
+      sb.push(config['params'].flatten) if config['params']
+      sb.flatten.join('_')
+    end
     
     class << self
       attr_accessor :trackers

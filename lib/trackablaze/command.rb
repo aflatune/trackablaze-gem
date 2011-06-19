@@ -20,7 +20,7 @@ module Trackablaze
       
       tracker_items.each do |tracker_item|
         puts "[ #{tracker_item.title} ]".center(75,'-')
-        puts "Key: #{tracker_item.key}"
+        puts "Key: #{tracker_item.key2}"
         puts "params: #{tracker_item.params}"
         puts "results: #{results[tracker_item.key]}"
       end
