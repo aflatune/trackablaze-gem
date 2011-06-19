@@ -17,4 +17,15 @@
     params:
       handle: msuster
 
-
+- klout:
+    params:
+      username: amolk
+    metrics:
+    - kscore
+    - slope
+    - kclass
+    - network_score
+    - amplification_score
+    - true_reach
+    - delta_1day
+    - delta_5day

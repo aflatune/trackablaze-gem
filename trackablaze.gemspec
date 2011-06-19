@@ -21,7 +21,8 @@ Gem::Specification.new do |s|
   # Tracker gem dependencies
   s.add_dependency "twitter"
   s.add_dependency "mini_fb"
-    
+  s.add_dependency "kloutbg"
+     
   s.add_development_dependency "rspec", "~> 2.5.0"
   s.add_development_dependency "mg"
   s.add_development_dependency "rails", ">= 3.0.0"
