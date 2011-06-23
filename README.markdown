@@ -132,8 +132,8 @@ are made of up of a **YAML config file** and a **ruby code file**.
 
 
 A tracker must implement get_metrics() method. This method takes
-in an array of configurations. Your tracker may choose to query
-for each configuration one by one or use any available optimized
+in an array of tracker items (i.e. configurations). Your tracker may choose to query
+for each tracker item one by one or use any available optimized
 API calls. For example, the above code queries Twitter API once
 for each user handle, but can be optimized by using the 
 ::Twitter.users API call that takes an array of user handles.
@@ -152,5 +152,5 @@ please see the wiki.
 
 Trackablaze and its recipes are distributed under the MIT License.
 
-[1]:http://railswizard.org/
+[1]:http://trackablaze.com
 [2]:https://github.com/aflatune/trackablaze-gem/tree/master/trackers

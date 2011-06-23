@@ -7,5 +7,5 @@ Dir[File.dirname(__FILE__) + '/support/*'].each{|path| require path}
 require 'trackablaze'
 
 RSpec.configure do |config|
-
+  Trackablaze::Tracker.load_trackers
 end
