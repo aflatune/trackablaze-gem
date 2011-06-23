@@ -2,42 +2,42 @@ title: 'Klout'
 
 params:
   username:
-    name: 'Username'
+    title: 'Username'
     description: 'Klout username'
     type: string
   
 metrics:
   kscore:
-    name: 'Score'
+    title: 'Score'
     description: 'Klout score'
     default: true
 
   slope:
-    name: 'Slope'
+    title: 'Slope'
     description: 'How fast Klout score is changing'
 
   kclass:
-    name: 'Class'
+    title: 'Class'
     description: 'Klout class assigned to the user'
     default: true
     
   network_score:
-    name: 'Network score'
+    title: 'Network score'
     description: 'Network Influence is the influence level of your engaged audience (see http://corp.klout.com/kscore)'
     
   amplification_score:
-    name: 'Amplification probability'
+    title: 'Amplification probability'
     description: 'Amplification Probability is the likelihood that your content will be acted upon (see http://corp.klout.com/kscore)'
     
   true_reach:
-    name: 'True reach'
+    title: 'True reach'
     description: 'True Reach is the size of your engaged audience (see http://corp.klout.com/kscore)'
     
   delta_1day:
-    name: '1 day delta'
+    title: '1 day delta'
     description: 'Change in Klout score in 1 day'
     default: true
         
   delta_5day:
-    name: '5 day delta'
+    title: '5 day delta'
     description: 'Change in Klout score in 5 days'

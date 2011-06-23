@@ -2,11 +2,11 @@ title: 'Google PageRank'
 
 params:
   domain:
-    name: 'Domain'
+    title: 'Domain'
     description: 'Domain name (e.g. google.com)'
     type: string
   
 metrics:
   pagerank:
-    name: 'PageRank'
+    title: 'PageRank'
     default: true

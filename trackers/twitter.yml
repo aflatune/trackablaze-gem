@@ -2,15 +2,15 @@ title: 'Twitter'
 
 params:
   handle:
-    name: 'Handle'
+    title: 'Handle'
     description: 'Twitter handle, i.e. username'
     type: string
   
 metrics:
   followers_count:
-    name: 'Followers'
+    title: 'Followers'
     default: true
   friends_count:
-    name: 'Following'
+    title: 'Following'
   statuses_count:
-    name: 'Tweets'
+    title: 'Tweets'

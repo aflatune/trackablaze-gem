@@ -10,28 +10,29 @@ Trackablaze::Tracker.trackers.each do |tracker_handle, tracker_class|
     end
     
     describe 'tracker configuration yml' do 
-      it("should should exist (#{tracker_class.handle}.yml)") { tracker_class.info.should_not be_nil; }
+      it("should exist (#{tracker_class.handle}.yml)") { tracker_class.info.should_not be_nil; }
       it("should be a hash"){ tracker_class.info.should be_kind_of(Hash); } 
     end
     
     describe 'tracker configuration' do
-      it("should have params hash"){ tracker_class.info['params'].should be_kind_of(Hash); } 
-      it("should have metrics hash"){ tracker_class.info['metrics'].should be_kind_of(Hash); } 
+      it("should have params"){ tracker_class.params.should be_kind_of(Hash); } 
+      it("should have metrics"){ tracker_class.metrics.should be_kind_of(Hash); } 
     end
     
     describe 'tracker params' do
-      tracker_class.info['params'].each do |param_name, param_config|
+      tracker_class.params.each do |param_name, param|
         describe "param #{param_name}" do
-          it("should have a name"){ param_config['name'].should be_kind_of(String); param_config['name'].should_not be_empty }
-          it("should have a description"){ param_config['description'].should be_kind_of(String); param_config['description'].should_not be_empty }
+          it("should have a name"){ param.name.should be_kind_of(String); param.name.should_not be_empty }
+          it("should have a title"){ param.title.should be_kind_of(String); param.title.should_not be_empty }
+          it("should have a description"){ param.description.should be_kind_of(String); param.description.should_not be_empty }
         end
       end
     end
 
     describe 'tracker metrics' do
-      tracker_class.info['metrics'].each do |metric_name, metric_config|
+      tracker_class.metrics.each do |metric_name, metric|
         describe "metric #{metric_name}" do
-          it("should have a name"){ metric_config['name'].should be_kind_of(String); metric_config['name'].should_not be_empty }
+          it("should have a name"){ metric.name.should be_kind_of(String); metric.name.should_not be_empty }
         end
       end
     end

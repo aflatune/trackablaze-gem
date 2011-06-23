@@ -2,11 +2,11 @@ title: 'Facebook page'
 
 params:
   page_id:
-    name: 'Page ID'
+    title: 'Page ID'
     description: 'This is the page ID (e.g. michaeljackson or 125602120804573)'
     type: string
   
 metrics:
   likes:
-    name: 'Likes'
+    title: 'Likes'
     default: true

@@ -1,5 +1,7 @@
 require 'trackablaze/utils'
 require 'trackablaze/command'
+require 'trackablaze/param'
+require 'trackablaze/metric'
 require 'trackablaze/tracker_item'
 require 'trackablaze/tracker'
 
